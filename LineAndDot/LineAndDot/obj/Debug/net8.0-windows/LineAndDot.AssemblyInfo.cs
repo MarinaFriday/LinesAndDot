@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LineAndDot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e4bfe0ec8fd14a54964008a78c64f2e3664888e")]
 [assembly: System.Reflection.AssemblyProductAttribute("LineAndDot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LineAndDot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

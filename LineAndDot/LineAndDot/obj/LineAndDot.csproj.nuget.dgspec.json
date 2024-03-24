@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marin\\OneDrive\\Desktop\\LineAndDot2\\LineAndDot\\LineAndDot\\LineAndDot.csproj": {}
+    "C:\\LineAndDot\\LinesAndDot\\LineAndDot\\LineAndDot\\LineAndDot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marin\\OneDrive\\Desktop\\LineAndDot2\\LineAndDot\\LineAndDot\\LineAndDot.csproj": {
+    "C:\\LineAndDot\\LinesAndDot\\LineAndDot\\LineAndDot\\LineAndDot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marin\\OneDrive\\Desktop\\LineAndDot2\\LineAndDot\\LineAndDot\\LineAndDot.csproj",
+        "projectUniqueName": "C:\\LineAndDot\\LinesAndDot\\LineAndDot\\LineAndDot\\LineAndDot.csproj",
         "projectName": "LineAndDot",
-        "projectPath": "C:\\Users\\marin\\OneDrive\\Desktop\\LineAndDot2\\LineAndDot\\LineAndDot\\LineAndDot.csproj",
+        "projectPath": "C:\\LineAndDot\\LinesAndDot\\LineAndDot\\LineAndDot\\LineAndDot.csproj",
         "packagesPath": "C:\\Users\\marin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marin\\OneDrive\\Desktop\\LineAndDot2\\LineAndDot\\LineAndDot\\obj\\",
+        "outputPath": "C:\\LineAndDot\\LinesAndDot\\LineAndDot\\LineAndDot\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marin\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -134,10 +134,11 @@ namespace LineAndDot
             highlightLines.Clear();
                 for (int i = 0; i < points.Count; i++)
                 {
-                if (points[i].X >= x && points[i].X <= x1 && points[i].Y <= y && points[i].Y >= y1 ||
-                    points[i].X <= x && points[i].X >= x1 && points[i].Y <= y && points[i].Y >= y1 ||
-                    points[i].X >= x && points[i].X <= x1 && points[i].Y >= y && points[i].Y <= y1 ||
-                    points[i].X >= x && points[i].X <= x1 && points[i].Y >= y && points[i].Y <= y1
+                if (
+                    (points[i].X <= x && points[i].X >= x1 && points[i].Y <= y && points[i].Y >= y1) ||
+                    (points[i].X >= x && points[i].X <= x1 && points[i].Y <= y && points[i].Y >= y1) ||
+                    (points[i].X <= x && points[i].X >= x1 && points[i].Y >= y && points[i].Y <= y1) ||
+                    (points[i].X >= x && points[i].X <= x1 && points[i].Y >= y && points[i].Y <= y1)
                     )
                 {
                     highlightPoints.Add(points[i]);
@@ -154,141 +155,137 @@ namespace LineAndDot
                     }
                 }
 
-                //if (i < points.Count-1)
-                //{
-                //    Point intersection1 = new Point();
+                if (i < points.Count-1)
+                {
+                    Point intersection1 = new Point();
 
-                //    intersection1.X = x;
-                //    intersection1.Y = (intersection1.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
+                    intersection1.X = x;
+                    intersection1.Y = (intersection1.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
 
-                //    if ((intersection1.X >= points[i].X &&
-                //        intersection1.X <= points[i+1].X &&
-                //        intersection1.Y >= points[i].Y &&
-                //        intersection1.Y <= points[i+1].Y)
-                //        ||
-                //        (intersection1.X <= points[i].X &&
-                //        intersection1.X >= points[i+1].X &&
-                //        intersection1.Y >= points[i].Y &&
-                //        intersection1.Y <= points[i+1].Y)
-                //        ||
-                //        (intersection1.X <= points[i].X &&
-                //         intersection1.X >= points[i+1].X &&
-                //         intersection1.Y <= points[i].Y &&
-                //         intersection1.Y >= points[i+1].Y
-                //        )
-                //        ||
-                //        (intersection1.X >= points[i].X &&
-                //        intersection1.X <= points[i+1].X &&
-                //        intersection1.Y <= points[i].Y &&
-                //        intersection1.Y >= points[i+1].Y)
-                //        )
-                //    {
-                //        if (intersection1.Y <= y && intersection1.Y >= y1 || intersection1.Y <= y1 && intersection1.Y >= y)
-                //        {
-                //            highlightLines.Add(new Line(points[i], points[i+1]));
-                //        }
-                //    }
+                    if ((intersection1.X >= points[i].X &&
+                        intersection1.X <= points[i+1].X &&
+                        intersection1.Y >= points[i].Y &&
+                        intersection1.Y <= points[i+1].Y)
+                        ||
+                        (intersection1.X <= points[i].X &&
+                        intersection1.X >= points[i+1].X &&
+                        intersection1.Y >= points[i].Y &&
+                        intersection1.Y <= points[i+1].Y)
+                        ||
+                        (intersection1.X <= points[i].X &&
+                         intersection1.X >= points[i+1].X &&
+                         intersection1.Y <= points[i].Y &&
+                         intersection1.Y >= points[i+1].Y
+                        )
+                        ||
+                        (intersection1.X >= points[i].X &&
+                        intersection1.X <= points[i+1].X &&
+                        intersection1.Y <= points[i].Y &&
+                        intersection1.Y >= points[i+1].Y)
+                        )
+                    {
+                        if (intersection1.Y <= y && intersection1.Y >= y1 || intersection1.Y <= y1 && intersection1.Y >= y)
+                        {
+                            highlightLines.Add(new Line(points[i], points[i+1]));
+                        }
+                    }
 
-                //    intersection1.X = x1;
-                //    intersection1.Y = (intersection1.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
+                    intersection1.X = x1;
+                    intersection1.Y = (intersection1.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
 
-                //    if ((intersection1.X >= points[i].X &&
-                //    intersection1.X <= points[i+1].X &&
-                //    intersection1.Y >= points[i].Y &&
-                //    intersection1.Y <= points[i+1].Y)
-                //    ||
-                //    (intersection1.X <= points[i].X &&
-                //    intersection1.X >= points[i+1].X &&
-                //    intersection1.Y >= points[i].Y &&
-                //    intersection1.Y <= points[i+1].Y)
-                //    ||
-                //    (intersection1.X <= points[i].X &&
-                //     intersection1.X >= points[i+1].X &&
-                //     intersection1.Y <= points[i].Y &&
-                //     intersection1.Y >= points[i+1].Y
-                //    )
-                //    ||
-                //    (intersection1.X >= points[i].X &&
-                //    intersection1.X <= points[i+1].X &&
-                //    intersection1.Y <= points[i].Y &&
-                //    intersection1.Y >= points[i+1].Y)
-                //    )
-                //    {
-                //        if (intersection1.Y <= y && intersection1.Y >= y1 || intersection1.Y <= y1 && intersection1.Y >= y)
-                //        {
-                //            highlightLines.Add(new Line(points[i], points[i+1]));
-                //        }
-                //    }
+                    if ((intersection1.X >= points[i].X &&
+                    intersection1.X <= points[i+1].X &&
+                    intersection1.Y >= points[i].Y &&
+                    intersection1.Y <= points[i+1].Y)
+                    ||
+                    (intersection1.X <= points[i].X &&
+                    intersection1.X >= points[i+1].X &&
+                    intersection1.Y >= points[i].Y &&
+                    intersection1.Y <= points[i+1].Y)
+                    ||
+                    (intersection1.X <= points[i].X &&
+                     intersection1.X >= points[i+1].X &&
+                     intersection1.Y <= points[i].Y &&
+                     intersection1.Y >= points[i+1].Y
+                    )
+                    ||
+                    (intersection1.X >= points[i].X &&
+                    intersection1.X <= points[i+1].X &&
+                    intersection1.Y <= points[i].Y &&
+                    intersection1.Y >= points[i+1].Y)
+                    )
+                    {
+                        if (intersection1.Y <= y && intersection1.Y >= y1 || intersection1.Y <= y1 && intersection1.Y >= y)
+                        {
+                            highlightLines.Add(new Line(points[i], points[i+1]));
+                        }
+                    }
 
-                //    intersection1.Y = y;
-                //    intersection1.X = (intersection1.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
+                    intersection1.Y = y;
+                    intersection1.X = (intersection1.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
 
-                //    if ((intersection1.X >= points[i].X &&
-                //    intersection1.X <= points[i+1].X &&
-                //    intersection1.Y >= points[i].Y &&
-                //    intersection1.Y <= points[i+1].Y)
-                //    ||
-                //    (intersection1.X <= points[i].X &&
-                //    intersection1.X >= points[i+1].X &&
-                //    intersection1.Y >= points[i].Y &&
-                //    intersection1.Y <= points[i+1].Y)
-                //    ||
-                //    (intersection1.X <= points[i].X &&
-                //     intersection1.X >= points[i+1].X &&
-                //     intersection1.Y <= points[i].Y &&
-                //     intersection1.Y >= points[i+1].Y
-                //    )
-                //    ||
-                //    (intersection1.X >= points[i].X &&
-                //    intersection1.X <= points[i+1].X &&
-                //    intersection1.Y <= points[i].Y &&
-                //    intersection1.Y >= points[i+1].Y)
-                //    )
-                //    {
-                //        if (intersection1.X <= x && intersection1.X >= x1 || intersection1.X <= x1 && intersection1.X >= x)
-                //        {
-                //            highlightLines.Add(new Line(points[i], points[i+1]));
-                //        }
-                //    }
+                    if ((intersection1.X >= points[i].X &&
+                    intersection1.X <= points[i+1].X &&
+                    intersection1.Y >= points[i].Y &&
+                    intersection1.Y <= points[i+1].Y)
+                    ||
+                    (intersection1.X <= points[i].X &&
+                    intersection1.X >= points[i+1].X &&
+                    intersection1.Y >= points[i].Y &&
+                    intersection1.Y <= points[i+1].Y)
+                    ||
+                    (intersection1.X <= points[i].X &&
+                     intersection1.X >= points[i+1].X &&
+                     intersection1.Y <= points[i].Y &&
+                     intersection1.Y >= points[i+1].Y
+                    )
+                    ||
+                    (intersection1.X >= points[i].X &&
+                    intersection1.X <= points[i+1].X &&
+                    intersection1.Y <= points[i].Y &&
+                    intersection1.Y >= points[i+1].Y)
+                    )
+                    {
+                        if (intersection1.X <= x && intersection1.X >= x1 || intersection1.X <= x1 && intersection1.X >= x)
+                        {
+                            highlightLines.Add(new Line(points[i], points[i+1]));
+                        }
+                    }
 
-                //    intersection1.Y = y1;
-                //    intersection1.X = (intersection1.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
+                    intersection1.Y = y1;
+                    intersection1.X = (intersection1.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
 
-                //    if ((intersection1.X >= points[i].X &&
-                //    intersection1.X <= points[i+1].X &&
-                //    intersection1.Y >= points[i].Y &&
-                //    intersection1.Y <= points[i+1].Y)
-                //    ||
-                //    (intersection1.X <= points[i].X &&
-                //    intersection1.X >= points[i+1].X &&
-                //    intersection1.Y >= points[i].Y &&
-                //    intersection1.Y <= points[i+1].Y)
-                //    ||
-                //    (intersection1.X <= points[i].X &&
-                //     intersection1.X >= points[i+1].X &&
-                //     intersection1.Y <= points[i].Y &&
-                //     intersection1.Y >= points[i+1].Y
-                //    )
-                //    ||
-                //    (intersection1.X >= points[i].X &&
-                //    intersection1.X <= points[i+1].X &&
-                //    intersection1.Y <= points[i].Y &&
-                //    intersection1.Y >= points[i+1].Y)
-                //    )
-                //    {
-                //        if (intersection1.X <= x && intersection1.X >= x1 || intersection1.X <= x1 && intersection1.X >= x)
-                //        {
-                //            highlightLines.Add(new Line(points[i], points[i+1]));
-                //        }
-                //    }
+                    if ((intersection1.X >= points[i].X &&
+                    intersection1.X <= points[i+1].X &&
+                    intersection1.Y >= points[i].Y &&
+                    intersection1.Y <= points[i+1].Y)
+                    ||
+                    (intersection1.X <= points[i].X &&
+                    intersection1.X >= points[i+1].X &&
+                    intersection1.Y >= points[i].Y &&
+                    intersection1.Y <= points[i+1].Y)
+                    ||
+                    (intersection1.X <= points[i].X &&
+                     intersection1.X >= points[i+1].X &&
+                     intersection1.Y <= points[i].Y &&
+                     intersection1.Y >= points[i+1].Y
+                    )
+                    ||
+                    (intersection1.X >= points[i].X &&
+                    intersection1.X <= points[i+1].X &&
+                    intersection1.Y <= points[i].Y &&
+                    intersection1.Y >= points[i+1].Y)
+                    )
+                    {
+                        if (intersection1.X <= x && intersection1.X >= x1 || intersection1.X <= x1 && intersection1.X >= x)
+                        {
+                            highlightLines.Add(new Line(points[i], points[i+1]));
+                        }
+                    }
 
-                    
+                }
 
-                    
-
-                //}
-
-                }                        
+            }                        
         }
 
     }
