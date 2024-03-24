@@ -1,0 +1,16 @@
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\bin\Debug\net8.0-windows\LineAndDot.exe
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\bin\Debug\net8.0-windows\LineAndDot.deps.json
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\bin\Debug\net8.0-windows\LineAndDot.runtimeconfig.json
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\bin\Debug\net8.0-windows\LineAndDot.dll
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\bin\Debug\net8.0-windows\LineAndDot.pdb
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.Form1.resources
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.csproj.GenerateResource.cache
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.AssemblyInfoInputs.cache
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.AssemblyInfo.cs
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.csproj.CoreCompileInputs.cache
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.dll
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\refint\LineAndDot.dll
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.pdb
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\LineAndDot.genruntimeconfig.cache
+C:\Users\marin\OneDrive\Desktop\LineAndDot2\LineAndDot\LineAndDot\obj\Debug\net8.0-windows\ref\LineAndDot.dll
