@@ -5,17 +5,17 @@ namespace LineAndDot
 {
     public partial class Form1 : Form
     {
-        bool isDraw = false;
-        bool isHighlight = false;
-        bool isClicked = false;
+        private bool isDraw = false;
+        private bool isHighlight = false;
+        private bool isClicked = false;
         private List<Point> points = new List<Point>();
         private List<Point> highlightPoints = new List<Point>();
         private List<Line> lines = new List<Line>();
         private List<Line> highlightLines = new List<Line>();
-        int x;
-        int y;
-        int x1;
-        int y1;
+        private int x;
+        private int y;
+        private int x1;
+        private int y1;
         
         public Form1()
         {
@@ -27,11 +27,9 @@ namespace LineAndDot
             if (isDraw && e.Button == MouseButtons.Left)
             {
                 points.Add(new Point(e.X, e.Y));
-                //base.OnMouseDown(e);
                 pictureBox1.Invalidate();
             }
-
-            if (isHighlight)
+            else if (isHighlight)
             {
                 isClicked = true;
                 lines.Clear();
@@ -42,55 +40,20 @@ namespace LineAndDot
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            base.OnPaint(e);
             Graphics g = e.Graphics;
 
-            if (isDraw)
-            {
-                foreach (var point in points)
-                {
-                    g.DrawRectangle(Pens.Black, point.X-2.0f, point.Y-2.0f, 4.0f, 4.0f);
-                }
-
-                if (points.Count>1) g.DrawLines(Pens.Black, points.ToArray());
-            }
+            DrawPointsAndLines(g, points);
+            
             if (isHighlight)
             {
-                if (points.Count>1) g.DrawLines(Pens.Black, points.ToArray());
-                Pen pen = new Pen(Color.Red);
-                //e.Graphics.DrawLine(pen, new Point(_x,_y), new Point(_x1,_y1));
-                e.Graphics.DrawLine(pen, new Point(x, y), new Point(x, y1));
-                e.Graphics.DrawLine(pen, new Point(x, y), new Point(x1, y));
-                e.Graphics.DrawLine(pen, new Point(x1, y), new Point(x1, y1));
-                e.Graphics.DrawLine(pen, new Point(x, y1), new Point(x1, y1));
-
-                foreach (var l in lines)
-                {
-                    e.Graphics.DrawLine(pen, l.point1, l.point2);
-                }
+                DrawRedRectangle(g, x, y, x1, y1);    
                 
-                HighlightPoints();
-                if (highlightPoints.Count>0 || highlightLines.Count>0)
-                {
-                    foreach (var p in highlightPoints)
-                    {                        
-                        e.Graphics.DrawRectangle(Pens.Red, p.X-2.0f, p.Y-2.0f, 4.0f, 4.0f);
-                    }
-                    Pen penRed = new Pen(Color.Red, 4.0f);
-                    foreach (var line in highlightLines) {
-                        e.Graphics.DrawLine(penRed, line.point1, line.point2);
-                    }
-                }
+                HighlightPoints(points, x, y, x1, y1);
+
+                HighlightLines(g, highlightPoints, highlightLines);
             }
-
-
         }
-
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            //if (e.Button == MouseButtons.Left) { isDraw = false; }
-        }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
             isDraw = true;
@@ -100,6 +63,7 @@ namespace LineAndDot
         {
             isDraw = false;
             isHighlight = true;
+            button1.Enabled = false;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -115,31 +79,29 @@ namespace LineAndDot
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            isClicked = false;
-            //lines.Add(new Line(new Point(_x, _y), new Point(_x1,_y1)));
-            lines.AddRange(new List<Line>() {
-            new Line(new Point(x, y), new Point(x, y1)),
-            new Line(new Point(x, y), new Point(x1, y)),
-            new Line(new Point(x1, y), new Point(x1, y1)),
-            new Line(new Point(x, y1), new Point(x1, y1))
-            });
             if (isHighlight) {
+                isClicked = false;
+            
+                lines.AddRange(new List<Line>() {
+                new Line(new Point(x, y), new Point(x, y1)),
+                new Line(new Point(x, y), new Point(x1, y)),
+                new Line(new Point(x1, y), new Point(x1, y1)),
+                new Line(new Point(x, y1), new Point(x1, y1))
+                });
+
                 x1 = e.X;
                 y1 = e.Y;
             }
         }
 
-        private void HighlightPoints() {
+        private void HighlightPoints(List<Point> points, int x, int y, int x1, int y1) {
+            
             highlightPoints.Clear();
             highlightLines.Clear();
-                for (int i = 0; i < points.Count; i++)
+
+            for (int i = 0; i < points.Count; i++)
                 {
-                if (
-                    (points[i].X <= x && points[i].X >= x1 && points[i].Y <= y && points[i].Y >= y1) ||
-                    (points[i].X >= x && points[i].X <= x1 && points[i].Y <= y && points[i].Y >= y1) ||
-                    (points[i].X <= x && points[i].X >= x1 && points[i].Y >= y && points[i].Y <= y1) ||
-                    (points[i].X >= x && points[i].X <= x1 && points[i].Y >= y && points[i].Y <= y1)
-                    )
+                if (IsPointInRectangle(points[i], x, y, x1, y1))
                 {
                     highlightPoints.Add(points[i]);
 
@@ -157,136 +119,122 @@ namespace LineAndDot
 
                 if (i < points.Count-1)
                 {
-                    Point intersection1 = new Point();
+                    Point intersection = new Point();
 
-                    intersection1.X = x;
-                    intersection1.Y = (intersection1.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
+                    intersection.X = x;
+                    intersection.Y = (intersection.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
 
-                    if ((intersection1.X >= points[i].X &&
-                        intersection1.X <= points[i+1].X &&
-                        intersection1.Y >= points[i].Y &&
-                        intersection1.Y <= points[i+1].Y)
-                        ||
-                        (intersection1.X <= points[i].X &&
-                        intersection1.X >= points[i+1].X &&
-                        intersection1.Y >= points[i].Y &&
-                        intersection1.Y <= points[i+1].Y)
-                        ||
-                        (intersection1.X <= points[i].X &&
-                         intersection1.X >= points[i+1].X &&
-                         intersection1.Y <= points[i].Y &&
-                         intersection1.Y >= points[i+1].Y
-                        )
-                        ||
-                        (intersection1.X >= points[i].X &&
-                        intersection1.X <= points[i+1].X &&
-                        intersection1.Y <= points[i].Y &&
-                        intersection1.Y >= points[i+1].Y)
-                        )
+                    if (IsPointIntersectionBelongSegment(intersection, points[i], points[i+1]) &&
+                        IsPointInRectangle(intersection, x, y, x1, y1))
                     {
-                        if (intersection1.Y <= y && intersection1.Y >= y1 || intersection1.Y <= y1 && intersection1.Y >= y)
-                        {
-                            highlightLines.Add(new Line(points[i], points[i+1]));
-                        }
+                        highlightLines.Add(new Line(points[i], points[i+1]));
+                    }                    
+
+                    intersection.X = x1;
+                    intersection.Y = (intersection.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
+
+                    if (IsPointIntersectionBelongSegment(intersection, points[i], points[i+1]) &&
+                        IsPointInRectangle(intersection, x, y, x1, y1))
+                    {                        
+                        highlightLines.Add(new Line(points[i], points[i+1]));                        
                     }
 
-                    intersection1.X = x1;
-                    intersection1.Y = (intersection1.X-points[i].X)*(points[i+1].Y-points[i].Y)/(points[i+1].X-points[i].X)+points[i].Y;
+                    intersection.Y = y;
+                    intersection.X = (intersection.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
 
-                    if ((intersection1.X >= points[i].X &&
-                    intersection1.X <= points[i+1].X &&
-                    intersection1.Y >= points[i].Y &&
-                    intersection1.Y <= points[i+1].Y)
-                    ||
-                    (intersection1.X <= points[i].X &&
-                    intersection1.X >= points[i+1].X &&
-                    intersection1.Y >= points[i].Y &&
-                    intersection1.Y <= points[i+1].Y)
-                    ||
-                    (intersection1.X <= points[i].X &&
-                     intersection1.X >= points[i+1].X &&
-                     intersection1.Y <= points[i].Y &&
-                     intersection1.Y >= points[i+1].Y
-                    )
-                    ||
-                    (intersection1.X >= points[i].X &&
-                    intersection1.X <= points[i+1].X &&
-                    intersection1.Y <= points[i].Y &&
-                    intersection1.Y >= points[i+1].Y)
-                    )
+                    if (IsPointIntersectionBelongSegment(intersection, points[i], points[i+1]) &&
+                        IsPointInRectangle(intersection, x, y, x1, y1))
                     {
-                        if (intersection1.Y <= y && intersection1.Y >= y1 || intersection1.Y <= y1 && intersection1.Y >= y)
-                        {
-                            highlightLines.Add(new Line(points[i], points[i+1]));
-                        }
+                        highlightLines.Add(new Line(points[i], points[i+1]));
                     }
 
-                    intersection1.Y = y;
-                    intersection1.X = (intersection1.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
+                    intersection.Y = y1;
+                    intersection.X = (intersection.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
 
-                    if ((intersection1.X >= points[i].X &&
-                    intersection1.X <= points[i+1].X &&
-                    intersection1.Y >= points[i].Y &&
-                    intersection1.Y <= points[i+1].Y)
-                    ||
-                    (intersection1.X <= points[i].X &&
-                    intersection1.X >= points[i+1].X &&
-                    intersection1.Y >= points[i].Y &&
-                    intersection1.Y <= points[i+1].Y)
-                    ||
-                    (intersection1.X <= points[i].X &&
-                     intersection1.X >= points[i+1].X &&
-                     intersection1.Y <= points[i].Y &&
-                     intersection1.Y >= points[i+1].Y
-                    )
-                    ||
-                    (intersection1.X >= points[i].X &&
-                    intersection1.X <= points[i+1].X &&
-                    intersection1.Y <= points[i].Y &&
-                    intersection1.Y >= points[i+1].Y)
-                    )
+                    if (IsPointIntersectionBelongSegment(intersection, points[i], points[i+1]) &&
+                    IsPointInRectangle(intersection, x, y, x1, y1))
                     {
-                        if (intersection1.X <= x && intersection1.X >= x1 || intersection1.X <= x1 && intersection1.X >= x)
-                        {
-                            highlightLines.Add(new Line(points[i], points[i+1]));
-                        }
-                    }
-
-                    intersection1.Y = y1;
-                    intersection1.X = (intersection1.Y - points[i].Y)*(points[i+1].X-points[i].X)/(points[i+1].Y-points[i].Y)+points[i].X;
-
-                    if ((intersection1.X >= points[i].X &&
-                    intersection1.X <= points[i+1].X &&
-                    intersection1.Y >= points[i].Y &&
-                    intersection1.Y <= points[i+1].Y)
-                    ||
-                    (intersection1.X <= points[i].X &&
-                    intersection1.X >= points[i+1].X &&
-                    intersection1.Y >= points[i].Y &&
-                    intersection1.Y <= points[i+1].Y)
-                    ||
-                    (intersection1.X <= points[i].X &&
-                     intersection1.X >= points[i+1].X &&
-                     intersection1.Y <= points[i].Y &&
-                     intersection1.Y >= points[i+1].Y
-                    )
-                    ||
-                    (intersection1.X >= points[i].X &&
-                    intersection1.X <= points[i+1].X &&
-                    intersection1.Y <= points[i].Y &&
-                    intersection1.Y >= points[i+1].Y)
-                    )
-                    {
-                        if (intersection1.X <= x && intersection1.X >= x1 || intersection1.X <= x1 && intersection1.X >= x)
-                        {
-                            highlightLines.Add(new Line(points[i], points[i+1]));
-                        }
-                    }
-
+                        highlightLines.Add(new Line(points[i], points[i+1]));
+                    }                    
                 }
 
             }                        
         }
 
+        private void DrawPointsAndLines(Graphics g, List<Point> points) {
+            
+            if (points.Count>1)
+            {
+                foreach (var point in points)
+                {
+                    g.DrawRectangle(Pens.Black, point.X-2.0f, point.Y-2.0f, 4.0f, 4.0f);
+                }
+
+                if (points.Count>1) g.DrawLines(Pens.Black, points.ToArray());
+            }
+        }
+
+        private void DrawRedRectangle(Graphics g, int x, int y, int x1, int y1) {
+            Pen pen = new Pen(Color.Red);
+            g.DrawLine(pen, new Point(x, y), new Point(x, y1));
+            g.DrawLine(pen, new Point(x, y), new Point(x1, y));
+            g.DrawLine(pen, new Point(x1, y), new Point(x1, y1));
+            g.DrawLine(pen, new Point(x, y1), new Point(x1, y1));
+
+            foreach (var l in lines)
+            {
+                g.DrawLine(pen, l.point1, l.point2);
+            }
+        }
+
+        private void HighlightLines(Graphics g, List<Point> highlightPoints, List<Line> highlightLines) {
+            
+            if (highlightPoints.Count>0 || highlightLines.Count>0)
+            {
+                Pen penRed = new Pen(Color.Red, 4.0f);
+                foreach (var p in highlightPoints)
+                {
+                    g.DrawRectangle(penRed, p.X-2.0f, p.Y-2.0f, 4.0f, 4.0f);
+                }
+
+                foreach (var line in highlightLines)
+                {
+                    g.DrawLine(penRed, line.point1, line.point2);
+                }
+            }
+        }
+
+        private bool IsPointInRectangle(Point p, int x, int y, int x1, int y1) {
+            return 
+            (p.X <= x && p.X >= x1 && p.Y <= y && p.Y >= y1) ||
+            (p.X >= x && p.X <= x1 && p.Y <= y && p.Y >= y1) ||
+            (p.X <= x && p.X >= x1 && p.Y >= y && p.Y <= y1) ||
+            (p.X >= x && p.X <= x1 && p.Y >= y && p.Y <= y1);
+        }
+
+        private bool IsPointIntersectionBelongSegment(Point intersection, Point p1, Point p2) {
+            return
+                (intersection.X >= p1.X &&
+                        intersection.X <= p2.X &&
+                        intersection.Y >= p1.Y &&
+                        intersection.Y <= p2.Y)
+                        ||
+                        (intersection.X <= p1.X &&
+                        intersection.X >= p2.X &&
+                        intersection.Y >= p1.Y &&
+                        intersection.Y <= p2.Y)
+                        ||
+                        (intersection.X <= p1.X &&
+                         intersection.X >= p2.X &&
+                         intersection.Y <= p1.Y &&
+                         intersection.Y >= p2.Y
+                        )
+                        ||
+                        (intersection.X >= p1.X &&
+                        intersection.X <= p2.X &&
+                        intersection.Y <= p1.Y &&
+                        intersection.Y >= p2.Y)
+                ;
+        }
     }
 }

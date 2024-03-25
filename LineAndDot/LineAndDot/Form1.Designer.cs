@@ -44,7 +44,6 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.Paint += pictureBox1_Paint;
-            pictureBox1.MouseClick += pictureBox1_MouseClick;
             pictureBox1.MouseDown += pictureBox1_MouseDown;
             pictureBox1.MouseMove += pictureBox1_MouseMove;
             pictureBox1.MouseUp += pictureBox1_MouseUp;
@@ -55,6 +54,7 @@
             button1.Name = "button1";
             button1.Size = new Size(143, 23);
             button1.TabIndex = 1;
+            button1.TabStop = false;
             button1.Text = "Draw ";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -65,6 +65,7 @@
             button2.Name = "button2";
             button2.Size = new Size(128, 23);
             button2.TabIndex = 2;
+            button2.TabStop = false;
             button2.Text = "Highlight";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;

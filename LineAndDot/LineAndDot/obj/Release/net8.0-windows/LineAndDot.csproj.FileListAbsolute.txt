@@ -1,0 +1,17 @@
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\bin\Release\net8.0-windows\LineAndDot.exe
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\bin\Release\net8.0-windows\LineAndDot.deps.json
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\bin\Release\net8.0-windows\LineAndDot.runtimeconfig.json
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\bin\Release\net8.0-windows\LineAndDot.dll
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\bin\Release\net8.0-windows\LineAndDot.pdb
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.Form1.resources
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.csproj.GenerateResource.cache
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.GeneratedMSBuildEditorConfig.editorconfig
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.AssemblyInfoInputs.cache
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.AssemblyInfo.cs
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.csproj.CoreCompileInputs.cache
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.sourcelink.json
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.dll
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\refint\LineAndDot.dll
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.pdb
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\LineAndDot.genruntimeconfig.cache
+C:\LineAndDot\LinesAndDot\LineAndDot\LineAndDot\obj\Release\net8.0-windows\ref\LineAndDot.dll
